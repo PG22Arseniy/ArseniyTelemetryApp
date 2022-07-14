@@ -28,9 +28,10 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
         constructor( name, subComponentList = []) {
             super( name, subComponentList )
             this.vm = {
-                navMenu:[
-                    { section: "Home" },
+                navMenu:[ 
                     { section: "About" },
+                    { section: "Admin"}  , 
+                    {section: "Charts"}  
                 ]
             };
         }
