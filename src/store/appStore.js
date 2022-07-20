@@ -21,7 +21,6 @@ export default {
         actionData: {},
         rec: new TData(),
     },
-
     // PUBLIC: injected into components
     // called to retrieve state data from the store
     getters: {
@@ -81,7 +80,7 @@ export default {
                     console.log(element) 
                 });
             })
-        },
+        }, 
       
         postSingle({ commit }, rec ) { 
             // return promises here if required,
