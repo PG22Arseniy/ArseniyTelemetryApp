@@ -59,7 +59,7 @@ export default {
         },
         loadRec({commit}, rec){ 
              
-            Remote.get('/api/tdata/single/1', )      
+            Remote.get(`/api/tdata/single/${rec.id}`, )       
             
             .then( response => response.data )
             .then( data => {  

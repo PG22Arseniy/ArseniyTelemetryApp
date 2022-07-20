@@ -34,7 +34,7 @@ Router.get('/single/:id', ( request, response, next ) => {
 Router.post('/single', ( request, response, next ) => {
     // addd/update single rec from client
     Records.push(request.body)
-    console.log(request.body)        
+   // console.log(request.body)         
     response.send("post something"); 
     next();
 }) 
