@@ -12,6 +12,26 @@ import Axios from 'axios'
 
 import TData from './TData' // import POJS model objects  
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { collection, doc, setDoc, getDoc } from "firebase/firestore"; 
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA4Fd4ok_n0q9qwVZ4n5LMBLsSowM6OgWw",
+    authDomain: "telemetry-2aa69.firebaseapp.com",
+    projectId: "telemetry-2aa69",
+    storageBucket: "telemetry-2aa69.appspot.com",
+    messagingSenderId: "819747404990",
+    appId: "1:819747404990:web:f15c250acbbdb2fadf32ef",
+    measurementId: "G-VW65CLKEYN"
+  }
+
+  // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app); 
+
+console.log(app);  
+
 const Remote = Axios.create({baseURL: "http://localhost:5000/"})
 
 export default {
@@ -67,7 +87,8 @@ export default {
                 let j = 0;
                 for (var i = 0; i < elements.length; i++) { 
           
-                 
+                    if (elements[i].value === "") {  continue }    
+
                     if (elements[i].type === "text") {
                        elements[i].value =  data[Object.keys(data)[j]]  
                        console.log(Object.keys(data)[j], " ", data[Object.keys(data)[j]] , " " , j)   
