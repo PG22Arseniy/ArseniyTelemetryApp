@@ -1,6 +1,6 @@
 /*
 VUEX Data Store.
-Copyright (c) 2019. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
+Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved. 
 */
 import Vue from 'vue'
 import Vuex from 'vuex'

@@ -3,7 +3,7 @@ VFS VUE Single File Component
 
 <pg-home user="User"></pg-home>
 
-Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
+Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
 -->
 <template>
 

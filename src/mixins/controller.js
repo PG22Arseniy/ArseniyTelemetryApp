@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2019 Kibble Online, in cooperation with Vancouver Film School
+ *   Copyright (c) 2022 Arseniy Skudaev, in cooperation with Vancouver Film School
  *   All rights reserved.
  */
 import Store from '../store.js'

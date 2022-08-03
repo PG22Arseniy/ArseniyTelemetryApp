@@ -1,4 +1,4 @@
-// Copyright (C) 2022 Scott Henshaw
+// Copyright (C) 2022 Arseniy Skudaev
 
 export const rec = {
     id: "",                       // auto generate unique rec id

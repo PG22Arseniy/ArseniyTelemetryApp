@@ -1,6 +1,6 @@
 /*
 VUE App's MAIN Component.
-Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
+Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
 */
 'use strict';
 

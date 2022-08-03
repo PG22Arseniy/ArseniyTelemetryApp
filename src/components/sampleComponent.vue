@@ -3,7 +3,7 @@
     -- user can add their own HTML code here, replaces 'slot' component --
 </some-tag-name>
 
-@copyright (c) 2019. Scott Henshaw. All Rights Reserved.
+@copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
 -->
 <template>
 

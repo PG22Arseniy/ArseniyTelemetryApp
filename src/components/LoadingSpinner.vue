@@ -1,6 +1,6 @@
 <!--
 <pg-loading-spinner />
-@copyright (c) 2021. Scott Henshaw. All Rights Reserved.
+@copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
 -->
 <template>
 
