@@ -49,6 +49,14 @@ export default {
         appTitle: "Game Telemetry Viewer",
         actionData: {},
         rec: new TData(),
+        recList: [{ id: 5118084088070144 }],
+        chartData: [
+            ['Time', 'X', 'Y', 'Action'],
+            ['12:42', 1000, 400, 200],
+            ['12:43', 1170, 460, 250],
+            ['12:44', 660, 1120, 300],
+            ['12:45', 1030, 540, 350]
+        ], 
     },
     // PUBLIC: injected into components
     // called to retrieve state data from the store
@@ -57,6 +65,7 @@ export default {
         theInfo: state => state.actionData.info,
 
         singleRec: state => state.rec,
+        actionSummary: state => state.chartData
     },
 
     // PUBLIC: injected into components
@@ -144,6 +153,7 @@ export default {
     mutations: {
         SET_USER: ( state, info ) => { state.actionData.info = info },
         UPDATE_REC: ( state, rec ) => { state.rec = rec },
+        UPDATE_ACTION_SUMMARY: ( state, data ) => { state.chartData = data } 
     },
 
 }

@@ -3,72 +3,100 @@ VFS VUE Single File Component
 
 <pg-home user="User"></pg-home>
 
-Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
+Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
 -->
 <template>
 
-    <section class="charts-container">
-        <div class="charts">
+    <section class="container main">
 
-            <div class="dialog">
+        <h3>Telemetry Analysis Charts</h3> 
 
-                <h1> Charts here </h1>
+        <div class="container chart-area">
 
+            <div class="area chart chart-1">
+                <t-bar-chart :data="actionSummary" />
+            </div>
+            <div class="area chart chart-2">
+                This is where one chart goes
+            </div>
+            <div class="area chart chart-3">
+                This is where one chart goes
+            </div>
+            <div class="area chart chart-4">
+                This is where one chart goes
             </div>
         </div>
-    </section> 
+
+    </section>
 
 </template>
 <script>
 
     import Controller from '@/mixins/controller'
 
-    class ChartsController extends Controller {
+    import TBarChart from '@/components/BarChart.vue'
+
+    class HomeController extends Controller {
 
         constructor( name, subComponentList = []) {
             super( name, subComponentList );
             this.vm = {
-                
+                formData: {
+                    sampleOne:"",
+                    sampleTwo:42,
+                },
             }
             this.props = {
-              
+                name: String,
             }
+
+            this.injectGetters(['actionSummary'])
         }
     }
 
-    export default new ChartsController('pgCharts');
+    export default new HomeController('pgHome', { TBarChart });
 
 </script>
 <style scoped>
     /* Local styles for this template */
-    .charts-container{
-        width: 100%; 
-        display: inline-block; 
-    }
-    .charts{
-        height: 78vh; 
-        width: 80vw;
-    }
-     h1{
-        color: blue; 
-        text-align: center; 
-     }
-
-    .sample-form {
-        border: 2px solid #333;
-        margin: 1em;
-        padding: 2em;
-    }
-
-    select, input, button {
-        font-size: 1.2em;
+    h3 {
+        color: black;
+        font-size: 1.5em;
         font-weight: 700;
-        height: 1.4em;
+        margin: 0.25em;
     }
 
-    button {
-        padding: .5em;
-        margin: .25em;
-        padding-bottom: 1.5em;
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        overflow-y:auto;
     }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .chart-area {
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 85vw;
+    }
+
+    .area {
+        margin: 2px;
+        border: 1px solid black;
+        background-color: lightgray;
+        color: black;
+        height: 78vh;
+        width: 75vw;
+    }
+
+    .chart {
+        height: 32vh;
+        width: 27vw;
+        background-color: rosybrown;
+    }
+
 </style>
