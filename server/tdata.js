@@ -41,14 +41,8 @@ Router.post('/single', ( request, response, next ) => {
 
 
 Router.get('/multi', ( request, response, next ) => {
-    // fetch page of xxx recs for client
-    let data = []; // ids of records
-    
-    Records.forEach(rec => {
-        data.push(rec.id) 
-    });
 
-    response.send(data); 
+    response.send(Records);  
     next();
 }) 
 

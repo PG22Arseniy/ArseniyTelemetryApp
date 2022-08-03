@@ -14,7 +14,7 @@ import TData from './TData' // import POJS model objects
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { collection, doc, setDoc, getDoc } from "firebase/firestore"; 
+import { collection, doc, setDoc, getDoc, getFirestore } from "firebase/firestore";  
 
 const firebaseConfig = {
     apiKey: "AIzaSyA4Fd4ok_n0q9qwVZ4n5LMBLsSowM6OgWw",
@@ -28,9 +28,16 @@ const firebaseConfig = {
 
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app); 
+const analytics = getAnalytics(app);  
 
-console.log(app);  
+// reference to root of fire store instance
+const db = getFirestore(); 
+
+// reference to the Telemtry collection of documents
+const collectionRef = collection(db, "telemetry");   
+
+// reference to the document of records
+const docRef = doc(db, "telemetry", "HSgxtNVEdROKu9mkk310");  
 
 const Remote = Axios.create({baseURL: "http://localhost:5000/"})
 
@@ -56,66 +63,44 @@ export default {
 
         updateSingle( { commit }, rec ) {
 
-            commit('UPDATE_REC', rec );
-        },
-        getIdList({ commit }, rec){    
+            (async () => {
 
-     
+                try {
+                    const docSnap = await getDoc(docRef);
+                    if(docSnap.exists()) {
+                
+                        // Client container of all records 
+                        let RecordsContainer = document.getElementById("Records");   
 
-            Remote.get('/api/tdata/multi', {})    
-            .then( response => response.data )
-            .then( data => {  
-                var idDataList = document.getElementById('ids');  
-                while (idDataList.lastElementChild) {
-                    idDataList.removeChild(idDataList.lastElementChild); 
-                  }
-                data.forEach( (id)=> {
-                    var option = document.createElement('option');
-                    option.value = id;  
-                    idDataList.appendChild(option); 
-                });
-            })
-        },
-        loadRec({commit}, rec){ 
-             
-            Remote.get(`/api/tdata/single/${rec.id}`, )       
-            
-            .then( response => response.data )
-            .then( data => {  
-                var elements = document.getElementById("my-form").elements;
+                        RecordsContainer.innerHTML = JSON.stringify(docSnap.data())   
 
-                let j = 0;
-                for (var i = 0; i < elements.length; i++) { 
-          
-                    if (elements[i].value === "") {  continue }    
-
-                    if (elements[i].type === "text") {
-                       elements[i].value =  data[Object.keys(data)[j]]  
-                       console.log(Object.keys(data)[j], " ", data[Object.keys(data)[j]] , " " , j)   
-                       j++  
+                        console.log(docSnap.data());
+                    } else {
+                        console.log("Document does not exist")  
                     }
-                   
+                
+                } catch(error) {
+                    console.log(error)
+                } 
+            
+            })();
+           
 
-                }
-                Object.keys(data).forEach(element => {
-                    console.log(element) 
-                });
-            })
+            commit('UPDATE_REC', rec ); 
+        },
+      
+        postSingle({ commit }, rec ) {  
+
+
         }, 
       
-        postSingle({ commit }, rec ) { 
-            // return promises here if required,
-            // this is also where to use AJAX to call a server
-            
-             Remote.post('/api/tdata/single', rec)   
-                .then( response => response.data )
-                .then( data => (data.error ? error => { throw( error ) }: data.payload ))
-                .then( content => {
-                    commit('SET_USER', content.info )
-                })
-                .catch( error => {
-                    console.log('Seems that role has already been taken.') 
-                })  
+        deleteMulti({commit}, rec){
+            commit('UPDATE_REC', rec ); 
+            console.log("Delete Multi")  
+        },
+        getMulti({commit}, rec){
+            commit('UPDATE_REC', rec );  
+            console.log("Get Multi") 
         }
     },
 

@@ -3,7 +3,7 @@ VFS VUE Single File Component
 
 <pg-home user="User"></pg-home>
 
-Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
+Copyright (c) 2022. Arseniy Skudaev, Kibble Online Inc. All Rights Reserved.
 -->
 <template>
 
@@ -11,8 +11,9 @@ Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
         <div class="home">
             <h4>Admin</h4>
             <div class="dialog">
+      
                 <form class="sample-form" @submit.prevent="saveIt( formData )" id = "my-form"> 
-                    <button  class="formBtn" @click="loadIds(formData)">Get Ids</button>   
+                    <button  class="formBtn" @click="getAllData(formData)">Get Records</button>    
                     <br/> 
                 
                     <label> ID of record </label> 
@@ -21,7 +22,6 @@ Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
                         <datalist id="ids"> 
                               <!-- level names -->  
                         </datalist>
-                        <button  class="formBtn" @click="loadRecord(formData)">load</button>     
                      
                     <br/>
 
@@ -39,14 +39,19 @@ Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
 
                     <button value="Submit" class="submitBtn">Save</button>
                      <button  class="formBtn" @click="addIt( formData )">Add New</button>  
+                     <button  class="formBtn" @click="getIt( formData )">Get New</button>   
                      <button  class="formBtn" @click="clearAllData( formData )">Clear All Data</button> 
                       
                 </form> 
+
+                <div id = "Records">
+
+                </div> 
             </div>
         </div>
     </section>
 
-</template>
+</template> 
 <script>
 
     import Controller from '@/mixins/controller'
@@ -65,10 +70,12 @@ Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
             }
 
             this.injectGetters(['singleRec']);
-            this.injectActions(['updateSingle'])
-            this.injectActions(['postSingle'])
-            this.injectActions(['getIdList']) 
-            this.injectActions(['loadRec'])  
+            this.injectActions(['updateSingle']);
+            this.injectActions(['postSingle']);
+            this.injectActions(['getSingle']);
+            this.injectActions(['deleteMulti']); 
+            this.injectActions(['getMulti']); 
+
         }
 
         saveIt( formData ) {
@@ -77,13 +84,16 @@ Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
         addIt(formData){
             this.postSingle( formData ); 
         }
-         loadIds(formData) { 
-            // after the Vue instance initializes, before instances are created
-            this.getIdList(formData) 
+        getIt(formData){
+            this.getSingle( formData ); 
         }
-        loadRecord(formData){
-            this.loadRec(formData)
+        clearAllData(formData) { 
+            this.deleteMulti(formData)  
         }
+        getAllData(formData) {  
+            this.getMulti(formData) 
+        }
+
     }
 
     export default new HomeController('pgHome');
@@ -123,5 +133,11 @@ Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
         padding: .5em;
         margin: .25em;
         padding-bottom: 1.5em;
+    }
+    #Records{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;  
     }
 </style>
