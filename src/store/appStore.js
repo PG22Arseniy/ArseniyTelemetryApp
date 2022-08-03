@@ -14,7 +14,7 @@ import TData from './TData' // import POJS model objects
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { collection, doc, setDoc, getDoc, getFirestore, getDocs } from "firebase/firestore";   
+import { collection, doc, setDoc, getDoc, getFirestore, getDocs, deleteDoc, getDocsFromCache, query } from "firebase/firestore";   
 
 const firebaseConfig = {
     apiKey: "AIzaSyA4Fd4ok_n0q9qwVZ4n5LMBLsSowM6OgWw",
@@ -95,9 +95,7 @@ export default {
         postSingle({ commit }, rec ) {   
             
             commit('UPDATE_REC', rec ); 
-
-            Records.push(rec); 
-
+            Records.push(rec);   
             (async () => { 
 
                 try {
@@ -119,15 +117,22 @@ export default {
       
         deleteMulti({commit}, rec){
 
-            db.collection("telemetry")
-            .get()
-            .then(res => {
-                res.forEach(element => {
-                element.ref.delete();
-                }); 
-            });
+            let RecordsNum =  Records.length+1;
+            (async () => {   
 
-            console.log("Delete Multi")  
+                try { 
+                    for (let i =1; i < RecordsNum; i++ )    
+                        await deleteDoc(doc(db, "telemetry", i.toString()))   
+                        
+                     document.getElementById("Records").innerHTML = ""   
+                } 
+
+                 catch(error) {
+                    console.log(error)  
+                } 
+    
+            })(); 
+            
         },
         getMulti({commit}, rec){
             commit('UPDATE_REC', rec );  
