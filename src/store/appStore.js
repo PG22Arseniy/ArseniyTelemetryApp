@@ -14,7 +14,7 @@ import TData from './TData' // import POJS model objects
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { collection, doc, setDoc, getDoc, getFirestore } from "firebase/firestore";  
+import { collection, doc, setDoc, getDoc, getFirestore, getDocs } from "firebase/firestore";   
 
 const firebaseConfig = {
     apiKey: "AIzaSyA4Fd4ok_n0q9qwVZ4n5LMBLsSowM6OgWw",
@@ -41,6 +41,8 @@ const docRef = doc(db, "telemetry", "HSgxtNVEdROKu9mkk310");
 
 const Remote = Axios.create({baseURL: "http://localhost:5000/"})
 
+var Records = []; 
+
 export default {
     // PRIVATE: model state of the application, a bunch of POJS objects
     state: {
@@ -63,39 +65,68 @@ export default {
 
         updateSingle( { commit }, rec ) {
 
+            Records = []; 
+
             (async () => {
 
                 try {
-                    const docSnap = await getDoc(docRef);
-                    if(docSnap.exists()) {
-                
-                        // Client container of all records 
-                        let RecordsContainer = document.getElementById("Records");   
+                    const q = collectionRef  
 
-                        RecordsContainer.innerHTML = JSON.stringify(docSnap.data())   
+                    const querySnapshot = await getDocs(q);
+                    querySnapshot.forEach((doc) => {
+                      // doc.data() is never undefined for query doc snapshots
+                        Records.push(doc.data()); 
 
-                        console.log(docSnap.data());
-                    } else {
-                        console.log("Document does not exist")  
-                    }
+
+                    });
+
+                    let RecordsContainer = document.getElementById("Records");
+
+                    RecordsContainer.innerHTML = JSON.stringify(Records); 
                 
                 } catch(error) {
                     console.log(error)
                 } 
             
             })();
-           
 
-            commit('UPDATE_REC', rec ); 
         },
       
-        postSingle({ commit }, rec ) {  
+        postSingle({ commit }, rec ) {   
+            
+            commit('UPDATE_REC', rec ); 
 
+            Records.push(rec); 
 
+            (async () => { 
+
+                try {
+                    // Add a record  
+                    await setDoc(doc(db, "telemetry", Records.length.toString()), {   
+                        sessionId: rec.sessionId,
+                        eventId: rec.eventId,
+                        id: rec.id,
+                        version: rec.version   
+                    });
+                
+                              
+                } catch(error) {
+                    console.log(error) 
+                } 
+            
+            })();
         }, 
       
         deleteMulti({commit}, rec){
-            commit('UPDATE_REC', rec ); 
+
+            db.collection("telemetry")
+            .get()
+            .then(res => {
+                res.forEach(element => {
+                element.ref.delete();
+                }); 
+            });
+
             console.log("Delete Multi")  
         },
         getMulti({commit}, rec){
