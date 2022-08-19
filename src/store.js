@@ -4,6 +4,7 @@ Copyright (c) 2022. Arseniy Skudaev. All Rights Reserved.
 */
 import Vue from 'vue'
 import Vuex from 'vuex'
+ 
 Vue.use( Vuex )
 
 // Modules

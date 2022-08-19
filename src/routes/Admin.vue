@@ -12,7 +12,7 @@ Copyright (c) 2022. Arseniy Skudaev, Kibble Online Inc. All Rights Reserved.
             <h4>Admin</h4>
             <div class="dialog">
       
-                <form class="sample-form" @submit.prevent="saveIt( formData )" id = "my-form"> 
+                <form class="sample-form" @submit.prevent="saveIt( )" id = "my-form"> 
                     <button  class="formBtn" @click="getAllData(formData)">Get Records</button>    
                     <br/> 
                 
@@ -36,6 +36,22 @@ Copyright (c) 2022. Arseniy Skudaev, Kibble Online Inc. All Rights Reserved.
                     <label for="eventId">Event id:</label>
                     <input id="eventId" name="eventId" 
                            v-model="formData.eventId"><br/>
+
+                    <label for="time">Time:</label>
+                    <input id="time" name="time" 
+                           v-model="formData.time"><br/>
+
+                    <label for="xPos">X:</label>
+                    <input id="xPos" name="xPos" 
+                           v-model="formData.xPos"><br/>
+
+                    <label for="yPos">Y:</label>
+                    <input id="yPos" name="yPos" 
+                           v-model="formData.yPos"><br/>
+
+                    <label for="action">Action:</label>
+                    <input id="action" name="action" 
+                           v-model="formData.action"><br/>
 
                     <button value="Submit" class="submitBtn">Save</button>
                      <button  class="formBtn" @click="addIt( formData )">Add New</button>  
@@ -70,7 +86,7 @@ Copyright (c) 2022. Arseniy Skudaev, Kibble Online Inc. All Rights Reserved.
             }
 
             this.injectGetters(['singleRec']);
-            this.injectActions(['updateSingle']);
+            this.injectActions(['updateRecords']);
             this.injectActions(['postSingle']);
             this.injectActions(['getSingle']);
             this.injectActions(['deleteMulti']); 
@@ -78,8 +94,8 @@ Copyright (c) 2022. Arseniy Skudaev, Kibble Online Inc. All Rights Reserved.
 
         }
 
-        saveIt( formData ) {
-            this.updateSingle( formData );
+        saveIt( ) {
+            this.updateRecords( );
         }
         addIt(formData){
             this.postSingle( formData ); 

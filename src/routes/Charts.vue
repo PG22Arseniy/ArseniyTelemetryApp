@@ -18,6 +18,7 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
             </div>
             <div class="area chart chart-2">
                 This is where one chart goes
+               <!--  <t-heat-map />   -->
             </div>
             <div class="area chart chart-3">
                 This is where one chart goes
@@ -33,6 +34,8 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
 <script>
 
     import Controller from '@/mixins/controller'
+
+   // import THeatMap from '@/components/HeatMap.vue' 
 
     import TBarChart from '@/components/BarChart.vue'
 
@@ -51,10 +54,23 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
             }
 
             this.injectGetters(['actionSummary'])
+             this.injectActions(['updateRecords']);
+        }
+         onMounted() {
+            //  innerHTML el is attached to parent
+            this.updateChartContiniously() 
+        }
+        updateChartContiniously(){
+             setTimeout(()=>{ 
+               
+                 this.updateRecords( ); 
+                this.updateChartContiniously()  
+            }, 5000);  
+            
         }
     }
 
-    export default new HomeController('pgHome', { TBarChart });
+    export default new HomeController('pgHome', { TBarChart }); // THeatMap
 
 </script>
 <style scoped>

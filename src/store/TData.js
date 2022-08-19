@@ -4,7 +4,11 @@ export const rec = {
     id: "",                       // auto generate unique rec id
     version: "2022.07.06-1234",  // String from date matches game
     sessionId: "1234",             // session within version
-    eventId: "20",                   // Event triggered telemetry data (ENUM?)
+    eventId: "20", 
+    game: "0",  
+    MachineGun: "0",
+    Rocket: "0", 
+    Cannon: "0"                // Event triggered telemetry data (ENUM?)
     /*
     location: { X: 0, Z: 0 },    // location of event
     mapName: "base_map",         // map name
