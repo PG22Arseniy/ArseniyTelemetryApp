@@ -67,7 +67,7 @@
         margin: auto; 
         margin-top: 20px;   
         width: 80%; 
-        height: 80%; 
+        height: 60%;  
         border: 3px solid black;
     }
     .heatmap-style{

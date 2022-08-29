@@ -57,6 +57,7 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
             this.injectGetters(['heatmapData']) 
             
             this.injectActions(['updateRecords']);
+
         }
          onMounted() {
             //  innerHTML el is attached to parent
@@ -112,7 +113,7 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
     }
 
     .chart {
-        height: 32vh;
+        height: 45vh; 
         width: 27vw;
         background-color: rosybrown;
     }

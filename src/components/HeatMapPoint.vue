@@ -8,9 +8,14 @@
 <template>
 
     <section class="point-style">  <!-- Just one main element per template -->
-        <div class = "point" v-bind:style="{ left: (X+1000) * 0.0005 * 100  + '%', top: (Y+1000) * 0.0005 * 100 +'%' }">                    
-        </div>
-    </section>
+        <div class = "point" @mouseover="hovered = true" @mouseleave="hovered = false" v-bind:style="{ left: (X+1000) * 0.0005 * 100  + '%', top: (Y+1000) * 0.0005 * 100 +'%' }" >                    
+        </div> 
+        <div class = "description" id = "description" v-if="hovered">   
+            <h4> Locaion : </h4> 
+            <p> X: {{X}}</p> 
+            <p> Y: {{Y}}</p>  
+        </div> 
+    </section> 
 
 </template>
 <script>
@@ -25,7 +30,7 @@
 
             // the vm date does not exist until the component is created
             this.vm = {
-                
+                hovered : false,
             }
 
             // props passed in when using this component
@@ -59,14 +64,24 @@
     styles that are specific to this component only, not sub-children
     */
 
+    .description{
+        position: absolute;  
+        margin-top: 90%;   
+        display: flex;
+        flex-direction: column;  
+        background-color: gray; 
+        width: 200px;
+        height: fit-content;  
+        border: 2px solid blue; 
+    }
     .point {
         background-color: beige;
-        width: 5px;
-        height: 5px; 
+        width: 10px;
+        height: 10px; 
         -moz-border-radius: 50px;
         -webkit-border-radius: 50px;
-        border-radius: 50px;
-        position: absolute; 
+        border-radius: 50px; 
+        position: absolute;  
     }
 
 </style>
