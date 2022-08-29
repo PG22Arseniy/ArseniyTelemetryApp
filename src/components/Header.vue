@@ -39,7 +39,7 @@ Copyright (c) 2022. Arseniy Skudaev, Kibble Online Inc. All Rights Reserved.
         }
     }
 
-    export default new HeaderController('pgHeader');
+    export default new HeaderController('THeader'); 
 /*
 Below is the exact data structure Vue expects to take as input
 when it creates a new component, and registers it.

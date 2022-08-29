@@ -61,15 +61,21 @@ export default {
             ['12:02', 660, 1120, 300],
             ['12:03', 1030, 540, 350]
         ], 
+        heatmapData: [ 
+            [400, 200],
+            [ 460, 250],
+            [1120, 300],
+            [540, 350] 
+        ], 
     },
     // PUBLIC: injected into components
     // called to retrieve state data from the store
     getters: {
         title: state => state.appTitle,
-        theInfo: state => state.actionData.info,
-
+        theInfo: state => state.actionData.info, 
         singleRec: state => state.rec,
-        actionSummary: state => state.chartData
+        actionSummary: state => state.chartData,
+        heatmapData: state => state.heatmapData 
     },
 
 
@@ -98,15 +104,29 @@ export default {
                     // Keys OF Chart
                     let chartData = [['Time', 'X', 'Y', 'Action']]
               
+                    let heatmapData = [[]];
+
                     // Fill Up the values
                     for (let i = 0; i<Records.length; i++){
 
-                        // get time, xPos, yPos and action from each record 
+                        // get time, xPos, yPos and action from each record  for Chart
                         let chartRow = [parseInt(Records[i].time), parseInt(Records[i].xPos), parseInt(Records[i].yPos), parseInt(Records[i].action)] 
-                        chartData.push(chartRow)                  
+                        chartData.push(chartRow)
+                        
+
+                        // get time, xPos, yPos and action from each record for HeatMap
+                        let heatmapRow = [parseInt(Records[i].xPos) , parseInt(Records[i].yPos), i]   
+                        heatmapData.push(heatmapRow); 
                     }           
+
                     // update chart data 
                     commit('UPDATE_ACTION_SUMMARY', chartData );
+
+                    heatmapData.shift(); 
+                    // update heatmap data 
+                    commit('UPDATE_HEATMAP_DATA', heatmapData );  
+
+                    
                 
                 } catch(error) {
                     console.log(error)
@@ -156,23 +176,6 @@ export default {
                    return result;
                 }
             })
-        
-
-            // commit('UPDATE_REC', rec ); 
-            // Records.push(rec);   
-            // // (async () => { 
-
-            //         // Add a record  
-            //         await setDoc(doc(db, "telemetry", Records.length.toString()), {   
-            //             sessionId: rec.sessionId,
-            //             eventId: rec.eventId,
-            //             id: rec.id,
-            //             version: rec.version   
-            //         }).catch(error) {
-                     
-            //             console.log(error) ;
-            //         }
-            // // })();
         }, 
       
         deleteMulti({commit}, rec){
@@ -207,7 +210,8 @@ export default {
     mutations: {
         SET_USER: ( state, info ) => { state.actionData.info = info },
         UPDATE_REC: ( state, rec ) => { state.rec = rec }, 
-        UPDATE_ACTION_SUMMARY: ( state, data ) => { state.chartData = data } 
+        UPDATE_ACTION_SUMMARY: ( state, data ) => { state.chartData = data }, 
+        UPDATE_HEATMAP_DATA: ( state, data ) => { state.heatmapData = data } 
     },
 
 }
