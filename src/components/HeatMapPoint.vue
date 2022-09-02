@@ -65,9 +65,9 @@
     */
 
     .description{
-        position: absolute;  
-        margin-top: 90%;   
-        display: flex;
+        position: absolute;   
+        bottom: -40%;      
+        display: flex;  
         flex-direction: column;  
         background-color: gray; 
         width: 200px;
@@ -82,6 +82,7 @@
         -webkit-border-radius: 50px;
         border-radius: 50px; 
         position: absolute;  
+        opacity: 0.4; 
     }
 
 </style>
