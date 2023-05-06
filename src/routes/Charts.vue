@@ -16,14 +16,8 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
             <div class="area chart chart-1">
                 <t-bar-chart :data="actionSummary" />
             </div>
-            <div class="area chart chart-2"> 
+            <div class="area chart chart-2">  
                 <t-heat-map :dotXY = "heatmapData" />     
-            </div>
-            <div class="area chart chart-3">
-                This is where one chart goes
-            </div>
-            <div class="area chart chart-4">
-                This is where one chart goes
             </div>
         </div>
 
@@ -114,7 +108,7 @@ Copyright (c) 2018. Scott Henshaw, Kibble Online Inc. All Rights Reserved.
 
     .chart {
         height: 45vh; 
-        width: 27vw;
+        width: 35vw; 
         background-color: rosybrown;
     }
 

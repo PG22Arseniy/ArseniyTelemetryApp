@@ -16,13 +16,16 @@
     Add "scoped" attribute to limit CSS to this component only <style scoped>
     styles that are specific to this component only, not sub-children
     */
+    h3{ 
+        text-align: center; 
+        margin: 15px; 
+     }
     .component-style {
         display: flex;
-        flex-direction:row;
+        flex-direction:column;
+        align-items: center;
         flex-wrap:wrap;
-        justify-content:space-evenly;
-        align-content: flex-start;
-        align-items:flex-start;
+        justify-content:space-evenly; 
     }
 
     .component-item {

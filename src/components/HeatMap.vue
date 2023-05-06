@@ -9,6 +9,7 @@
 
     <section class="heatmap-style">  <!-- Just one main element per template -->
 
+            <h3>Heat Map</h3>  
             <div class="heatmap-border" id = "heatmap" >    
                 
                  <t-point v-for='(product) in dotXY' :key='product[2] ' :X = product[0]  :Y = product[1]>            
@@ -46,7 +47,10 @@
                 dotXY : Array 
             }
 
+           
+
         }
+
     }
 
     export default new HeatMapController('THeatMap' , { TPoint} ); 
@@ -59,7 +63,15 @@
     */
     .heatmap-style{
         position: relative; 
+        align-items: center;
+        display: flex;
+        flex-direction: column; 
     }
+
+    h3{ 
+        text-align: center; 
+        margin: 15px; 
+     }
 
     .heatmap-border{
 

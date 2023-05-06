@@ -125,7 +125,6 @@ export default {
                     heatmapData.shift(); 
                     // update heatmap data 
                     commit('UPDATE_HEATMAP_DATA', heatmapData );  
-
                     
                 
                 } catch(error) {
@@ -211,7 +210,7 @@ export default {
         SET_USER: ( state, info ) => { state.actionData.info = info },
         UPDATE_REC: ( state, rec ) => { state.rec = rec }, 
         UPDATE_ACTION_SUMMARY: ( state, data ) => { state.chartData = data }, 
-        UPDATE_HEATMAP_DATA: ( state, data ) => { state.heatmapData = data } 
+        UPDATE_HEATMAP_DATA: ( state, data ) => { state.heatmapData = data;  } 
     },
 
 }
